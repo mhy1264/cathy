@@ -69,6 +69,9 @@ class Cathy:
 
             login = self.session.post(self.loginURL, data=loginPayLoad)
 
+            with open ("debug.html","wt",encoding=login.encoding) as f:
+                f.write(login.text)
+
             if "已登錄活動" in login.text:
                 self.Consolelog("Login Success "+capt)
                 break
@@ -79,7 +82,7 @@ class Cathy:
                 elif "您所輸入的身分證字號/居留證號與出生年月日不符，煩請確認並重新輸入" in login.text:
                     self.Consolelog("您所輸入的身分證字號/居留證號與出生年月日不符，煩請確認並重新輸入")
                     exit(1)
-                elif "生日格式YYYYMMDD錯誤" in login.text:
+                elif "&#x751F;&#x65E5;&#x683C;&#x5F0F;YYYYMMDD&#x932F;&#x8AA4;" in login.text:
                     self.Consolelog("生日格式YYYYMMDD錯誤")
                     exit(1)
                 elif "驗證碼輸入錯誤" in login.text:
